@@ -1,0 +1,27 @@
+{
+  "name": "allinone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "logger": "0.0.1",
+    "nodemailer": "^6.4.15",
+    "number": "0.0.1",
+    "pg": "^8.4.2",
+    "random": "^2.2.0",
+    "random-number": "0.0.9",
+    "simple-git": "^2.23.0",
+    "substring": "^1.0.0",
+    "substrings": "^1.1.1",
+    "uuid": "^8.3.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
