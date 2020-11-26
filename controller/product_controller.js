@@ -72,8 +72,8 @@ exports.updateproduct=async(req,res)=>{
 
 exports.deleteproduct=async(req,res)=>{
     try{
-        let id=req.body.id;
-        let result=await product.deleteproduct(id);
+        let key=req.body.key;
+        let result=await product.deleteproduct(key);
         if(result){
             return res.status(200).json({
                 status:"Success",
