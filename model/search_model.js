@@ -1,49 +1,77 @@
 const pool=require('../db')
+const { data } = require('../logger')
 const logger=require('../logger')
 
-exports.searchproduct=async(name,limit)=>{
-    try{
-        let Json={
-            rows:[]
-        }
-        let query=`select key,name from public.product where name_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
-        let result=await pool.query(query);
-        //  console.log(result.rows);
-        if(result.rowCount>0 && result!=null){console.log("here1");return result}
-        else{console.log("else1");return Json};
-    }
-    catch(error){
-        console.log(`catch error (searchmodel->searchproduct) : ${error.message}`)
-    }
-}
-exports.searchcategory=async(name,limit)=>{
-    try{
-        let Json={
-            rows:[]
-        }
-        let query=`select key,name from public.category where category_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
-        let result=await pool.query(query);
-        // console.log(result1.rows);s
-        if(result.rowCount>0 && result!=null){console.log("here2");return result}
-        else{console.log("else2");return Json}
-    }
-    catch(error){
-        console.log(`catch error (searchmodel->searchcategory) : ${error.message}`)
-    }
-}
+// exports.searchproduct=async(name,limit)=>{
+//     try{
+//         let Json={
+//             rows:[]
+//         }
+//         let query=`select key,name from public.product where name_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
+//         let result=await pool.query(query);
+//         //  console.log(result.rows);
+//         if(result.rowCount>0 && result!=null){console.log("here1");return result}
+//         else{console.log("else1");return Json};
+//     }
+//     catch(error){
+//         console.log(`catch error (searchmodel->searchproduct) : ${error.message}`)
+//     }
+// }
+// exports.searchcategory=async(name,limit)=>{
+//     try{
+//         let Json={
+//             rows:[]
+//         }
+//         let query=`select key,name from public.category where category_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
+//         let result=await pool.query(query);
+//         // console.log(result1.rows);
+//         if(result.rowCount>0 && result!=null){console.log("here2");return result}
+//         else{console.log("else2");return Json}
+//     }
+//     catch(error){
+//         console.log(`catch error (searchmodel->searchcategory) : ${error.message}`)
+//     }
+// }
 
-exports.searchkeyword=async(name,limit)=>{
+// exports.searchkeyword=async(name,limit)=>{
+//     try{
+//         let Json={
+//             rows:[]
+//         }
+//         let query=`select key,name from public.keyword where keyword_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
+//         let result=await pool.query(query);
+//         //  console.log(result.rows);
+//         if(result.rowCount>0 && result!=null){console.log("here3");return result}
+//         else {console.log("else3");return Json}
+//     }
+//     catch(error){
+//         console.log(`catch error (searchmodel->searchkeyword) : ${error.message}`)
+//     }
+// }
+
+
+
+
+module.exports.searchdirectcase=async(name,limit)=>{
     try{
         let Json={
-            rows:[]
+                    rows:[]
+                 }
+        let sqlQuery=`select key,name from public.product where name_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
+        let data=[];
+        let result=await pool.query(sqlQuery,data)
+        if(result.rowCount>0)
+        {   
+            console.log("inside model :"+result.rows);
+            return result;
         }
-        let query=`select key,name from public.keyword where keyword_tsvector @@ plainto_tsquery('${name}') or name ILIKE '%${name}%' limit ${limit};`
-        let result=await pool.query(query);
-        //  console.log(result.rows);
-        if(result.rowCount>0 && result!=null){console.log("here3");return result}
-        else {console.log("else3");return Json}
+        else
+        {
+             return Json;
+        }    
     }
-    catch(error){
-        console.log(`catch error (searchmodel->searchkeyword) : ${error.message}`)
+    catch(error)
+    {
+        console.log(`catch error (searchmodel->searchProduct) : ${error.message}`)
     }
 }
